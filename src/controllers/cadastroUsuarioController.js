@@ -1,0 +1,1 @@
+const cadastrUsuarioServices = require('./cadastrUsuarioController')
