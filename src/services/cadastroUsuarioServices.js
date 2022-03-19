@@ -3,7 +3,7 @@ const db = require("../db");
 module.exports = {
   buscarUsuario: () => {
     return new Promise((aceito, rejeitado) => {
-      db.query("select * from cadastro", (error, results) => {
+      db.query("select * from usuario", (error, results) => {
         if (error) {
           rejeitado(error);
           return;
@@ -15,7 +15,7 @@ module.exports = {
   buscarUmUsuario: (id) => {
     return new Promise((aceito, rejeito) => {
       db.query(
-        "select * from cadastro where id = ?",
+        "select * from usuario where id = ?",
         [id],
         (error, results) => {
           if (error) {
@@ -31,11 +31,11 @@ module.exports = {
       );
     });
   },
-  inserirUsuario: (nome,email, senha) => {
+  inserirUsuario: (nome,email,senha) => {
     return new Promise((aceito, rejeitado) => {
       db.query(
-        "INSERT INTO cadastro (email, senha) VALUES (?, ?)",
-        [nome,email, senha],
+        "INSERT INTO usuario (nome,email, senha) VALUES (?,?,?)",
+        [nome,email,senha],
         (error, results) => {
           if (error) {
             rejeitado(error);

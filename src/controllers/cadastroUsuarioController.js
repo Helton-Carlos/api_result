@@ -27,12 +27,12 @@ module.exports = {
   inserirUsuario: async (req, res) => {
     let getJson = { error: "", result: {} };
 
-    let nome=req.body.cadastrar;
+    let nome= req.body.nome;
     let email = req.body.email;
     let senha = req.body.senha;
 
     if (nome && email && senha) {
-      let usuario = await cadastroUsuarioServices.inserirUsuario(nome,email, senha);
+      let usuario = await cadastroUsuarioServices.inserirUsuario(nome,email,senha);
       getJson.result = {
         id: usuario,
         nome,
