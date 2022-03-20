@@ -6,6 +6,7 @@ module.exports = {
     let nota = await cadastroNotaServices.buscarNota();
     for (let i in nota) {
       json.result.push({
+        id: nota[i].id,
         pedido: nota[i].pedido,
         nf: nota[i].nf,
         empresa: nota[i].empresa,
@@ -17,8 +18,8 @@ module.exports = {
 
   buscarUmaNota: async (req, res) => {
     let getJson = { error: "", result: {} };
-    let pedido = req.params.pedido;
-    let nota = await UsuarioServices.buscarUmaNota(pedido);
+    let id = req.params.id;
+    let nota = await cadastroNotaServices.buscarUmaNota(id);
     if (nota) {
       getJson.result = nota;
     }
@@ -32,10 +33,11 @@ module.exports = {
     let empresa = req.body.empresa;
     let status = req.body.status;
 
-    if (pedido && nf) {
-      let nota = await UsuarioServices.inserirNota(pedido, nf,status,empresa);
+    if (pedido && nf && empresa && status) {
+      let nota = await cadastroNotaServices.inserirNota(pedido,nf,empresa,status);
       getJson.result = {
-        pedido: nota,
+        id: nota,
+        pedido,
         nf,
         status,
         empresa
@@ -48,7 +50,7 @@ module.exports = {
 
   excluirNota: async (req, res) => {
     let getJson = { error: "", result: {} };
-    await UsuarioServices.excluirNota(req.params.pedido);
+    await cadastroNotaServices.excluirNota(req.params.pedido);
     res.json(getJson);
   },
 };

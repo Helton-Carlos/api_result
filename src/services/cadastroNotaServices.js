@@ -12,11 +12,11 @@ module.exports = {
       });
     });
   },
-  buscarUmaNota: (pedido) => {
+  buscarUmaNota: (id) => {
     return new Promise((aceito, rejeito) => {
       db.query(
-        "select * from cadastrar_nota where pedido = ?",
-        [pedido],
+        "select * from cadastrar_nota where id = ?",
+        [id],
         (error, results) => {
           if (error) {
             rejeito(error);
@@ -31,24 +31,24 @@ module.exports = {
       );
     });
   },
-  inserirNota: (pedpedidoo,nf,status,empresa) => {
+  inserirNota: (pedido,nf,status,empresa) => {
     return new Promise((aceito, rejeitado) => {
       db.query(
-        "INSERT INTO cadastrar_nota (pedpedidoo,nf,status,empresa) VALUES (?, ?)",
-        [pedpedidoo,nf,status,empresa],
+        "INSERT INTO cadastrar_nota (pedido,nf,status,empresa) VALUES (?,?,?,?)",
+        [pedido,nf,status,empresa],
         (error, results) => {
           if (error) {
             rejeitado(error);
             return;
           }
-          aceito(results.insertpedido);
+          aceito(results.insertid);
         }
       );
     });
   },
-  excluirNota:(pedpedidoo) =>{
+  excluirNota:(id) =>{
     return new Promise((aceito,rejeito)=>{
-      db.query('DELETE FROM cadastrar_nota WHERE pedpedidoo = ?',[pedpedidoo],(error,results)=>{
+      db.query('DELETE FROM cadastrar_nota WHERE id = ?',[id],(error,results)=>{
         if(error){
           rejeito(error)
           return 
