@@ -39,8 +39,8 @@ module.exports = {
         id: nota,
         pedido,
         nf,
-        status,
-        empresa
+        empresa,
+        status
       };
     } else {
       getJson.error = "Campos não enviados";

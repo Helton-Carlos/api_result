@@ -31,11 +31,11 @@ module.exports = {
       );
     });
   },
-  inserirNota: (pedido,nf,status,empresa) => {
+  inserirNota: (pedido,nf,empresa,status) => {
     return new Promise((aceito, rejeitado) => {
       db.query(
-        "INSERT INTO cadastrar_nota (pedido,nf,status,empresa) VALUES (?,?,?,?)",
-        [pedido,nf,status,empresa],
+        "INSERT INTO cadastrar_nota (pedido,nf,empresa,status) VALUES (?,?,?,?)",
+        [pedido,nf,empresa,status],
         (error, results) => {
           if (error) {
             rejeitado(error);
